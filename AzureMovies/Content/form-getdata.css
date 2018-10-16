@@ -1,0 +1,183 @@
+﻿html{
+    background-color: #f3f3f3;
+}
+
+.form-basic{
+    margin: 0 auto;
+    padding: 55px;
+    box-sizing: border-box;
+    background-color:  #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    font: bold 14px sans-serif;
+    text-align: center;
+    margin-top:-70px;
+    background-color: #090000
+}
+
+.form-basic .form-row{
+    text-align: left;
+    margin-bottom: 22px;
+}
+
+.form-basic .form-title-row{
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+/* The form title */
+
+.form-basic h1{
+    display: inline-block;
+    box-sizing: border-box;
+    color:  #4c565e;
+    font-size: 24px;
+    padding: 0 10px 15px;
+    border-bottom: 2px solid #6caee0;
+    margin: 0;
+}
+
+.form-basic .form-row > label span{
+    display: inline-block;
+    box-sizing: border-box;
+    color: #5F5F5F;
+    width: 180px;
+    text-align: right;
+    vertical-align: top;
+    padding: 12px 25px;
+}
+
+.form-basic input{
+    color:  #5f5f5f;
+    box-sizing: border-box;
+    width: 240px;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    border: 1px solid #dbdbdb;
+}
+
+.form-basic input[type=radio],
+.form-basic input[type=checkbox]{
+    box-shadow: none;
+    width: auto;
+}
+
+.form-basic input[type=checkbox]{
+    margin-top: 13px;
+}
+
+@media (max-width: 600px) {
+
+    .form-basic{
+        padding: 30px;
+        max-width: 480px;
+    }
+
+    .form-basic .form-row{
+        max-width: 300px;
+        margin: 25px auto;
+        text-align: left;
+    }
+
+    .form-basic .form-title-row{
+        margin-bottom: 50px;
+    }
+
+    .form-basic .form-row > label span{
+        display: block;
+        text-align: left;
+        padding: 0 0 15px;
+    }
+
+    .form-basic select{
+        width: 240px;
+    }
+
+    .form-basic input[type=checkbox]{
+        margin-top:0;
+    }
+
+    .form-basic .form-radio-buttons > div{
+        margin: 0 0 10px;
+    }
+
+    .form-basic button{
+        margin: 0;
+    }
+
+}
+
+.Poster{
+    width:300px;
+    height:auto;
+    position:absolute;
+}
+.MovieTitle{
+    position:absolute;
+}
+.MovieOvierview{
+    margin-left:20px;
+    position:absolute;
+    margin-top:0px;
+    width:400px;
+    color:#4c565e;
+}
+.MovieReleaseDate{
+    position:absolute;
+    margin-top:150px;
+    margin-left:20px;
+    color:#4c565e;
+}
+.MovieBudget{
+    position:absolute;
+    margin-top:190px;
+    margin-left:20px;
+    color:#4c565e;
+}
+.MovieRevenue{
+    position:absolute;
+    margin-top:230px;
+    margin-left:20px;
+    color:#4c565e;
+}
+.MovieGenres{
+    position:absolute;
+    margin-top:70px;
+    margin-left:20px;
+    color:#4c565e;
+}
+.MovieRuntime{
+    position:absolute;
+    margin-top:310px;
+    margin-left:20px;
+    color:#4c565e;
+}
+.MovieTagline{
+    text-align:center;
+    margin-top:-60px;
+    margin-bottom:20px;
+    color:red;
+}
+.MovieTaglineLBL{
+    width:300px;
+}
+.ActorPhoto{
+    width:60px;
+    height:80px;
+}
+.MovieData{
+    width:410px;
+    margin-left:320px;
+    color:white;
+    margin-bottom:90px;
+}
+.CrewTable{
+    color:white;
+    margin-top:250px;
+}
+.Trailer{
+    width:460px;
+    height:300px;
+    margin-left:800px;
+    margin-top:-390px;
+    position:absolute;
+}

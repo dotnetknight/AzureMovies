@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/UpComingPosters.css" />
+
+    <title></title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("GetData", "Search", FormMethod.Post))
+        {
+            List<AzureMovies.GetUpcoming> Upcoming = new List<GetUpcoming>();
+            Upcoming = AzureMovies.GetUpcomingData.GetData();
+
+            <div class="UpComingDiv">
+                <label class="UpComingLBL">Upcoming:</label>
+                <br />
+                @for (int i = 0; i < 9; i++)
+                {
+                    <div class="container1">
+                        <img src="@Url.Content("http://image.tmdb.org/t/p/original" + @Upcoming[i].poster_path)" alt="Avatar" class="image1">
+                        <div class="middle1">
+                            <button type="submit" class="text1" id="@Upcoming[i].id" name="btnId" value="@Upcoming[i].id">@Upcoming[i].title</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>

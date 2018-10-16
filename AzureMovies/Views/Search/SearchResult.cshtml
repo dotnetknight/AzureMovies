@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search results</title>
+    <link rel="stylesheet" href="~/Content/form-searchresults.css" />
+
+    <script>
+        function a(Elem) {
+            var g = document.getElementById(Elem);
+            alert(g.id);
+        }
+    </script>
+
+</head>
+<body>
+    <div>
+        @RenderPage("~/Views/Header.cshtml")
+        @using (Html.BeginForm("GetData", "Search", FormMethod.Post))
+        {
+            List<AzureMovies.Models.GetSearchResults> SearchResults = new List<AzureMovies.Models.GetSearchResults>();
+            SearchResults = AzureMovies.Controllers.SearchController.SearchResults;
+
+            <div class="SearchResultsDiv">
+                @for (int i = 0; i < SearchResults.Count; i++)
+                {
+                    if (SearchResults[i].poster_path == null) { i++; }
+                    else
+                    {
+                        <div class="container3">
+                            <img src="@Url.Content("http://image.tmdb.org/t/p/original" + @SearchResults[i].poster_path)" class="image3" />
+                            <div class="middle3">
+                                <!-- <div class="text3" id="@SearchResults[i].id" onclick="a(this.id)" name="titleName"> @SearchResults[i].title </div>-->
+                                <button type="submit" class="text3" id="@SearchResults[i].id" name="btnId" value="@SearchResults[i].id">@SearchResults[i].title</button>
+                            </div>
+                        </div>
+                    }
+                }
+                @if(SearchResults.Count==0 || SearchResults.Count == null)
+                {
+                    <label style="font-size:larger; font-weight:bold; color:red;">Sorry :( no information were found.</label>
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>

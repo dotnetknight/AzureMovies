@@ -1,0 +1,43 @@
+﻿@model AzureMovies.Models.Search
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/ryDNhMO.jpg" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/demo.css" />
+    <link rel="stylesheet" href="~/Content/UserArea.css" />
+    <link rel="stylesheet" href="~/Content/form-search.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <title></title>
+</head>
+<body>
+    <ul>
+        @RenderPage("~/Views/Search/Search.cshtml")
+
+        <li><a href="http://nqmoviesdb.azurewebsites.net/">Home</a></li>
+
+        @if (Request.IsAuthenticated)
+        {
+            <li><a href="~/Account/MyProfile">My Profile</a></li>
+            <li class="UserAreaForm">
+                <label style="font-weight:bold;">Hey @AzureMovies.Controllers.HomeController.Name!</label>
+                @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutform" }))
+                { <a href="javascript:document.getElementById('logoutform').submit()" class="logout">Logout</a> }
+            </li>
+        }
+        @if (!Request.IsAuthenticated)
+        {
+            <li><a href="~/Account/Registration">Register</a></li>
+            <li><a href="~/Account/Login">Login</a></li>
+        }
+
+    </ul>
+</body>
+</html>

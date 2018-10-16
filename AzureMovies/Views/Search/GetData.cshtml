@@ -1,0 +1,121 @@
+﻿<html>
+<head>
+
+    <link rel="stylesheet" href="~/Content/demo.css" />
+    <link rel="stylesheet" href="~/Content/form-getdata.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrapmin.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <title>@AzureMovies.Controllers.SearchController.MovieTitle Data</title>
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/ryDNhMO.jpg" />
+</head>
+<body>
+    @RenderPage("~/Views/Header.cshtml")
+    <form class="form-basic" method="post" action="#">
+        <div class="main-content">
+            <div class="form-title-row">
+                <h1>@AzureMovies.Controllers.SearchController.MovieTitle</h1>
+            </div>
+            <br />
+            <div class="MovieTagline">
+                <label class="MovieTaglineLBL">@AzureMovies.Controllers.SearchController.TagLine</label>
+            </div>
+            <div class="form-row">
+                <label>
+                    <img src="@AzureMovies.Controllers.SearchController.PosterPath" class="Poster" />
+                    <label class="MovieData">
+                        @if (AzureMovies.Controllers.SearchController.OriginalLanguage != null || AzureMovies.Controllers.SearchController.OriginalLanguage != "")
+                        {
+                            @Html.Raw("Language: " + AzureMovies.Controllers.SearchController.OriginalLanguage)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.Runtime != null || AzureMovies.Controllers.SearchController.Runtime != "")
+                        {
+                            @Html.Raw("Runtime: " + AzureMovies.Controllers.SearchController.Runtime)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.ReleaseDate != null || AzureMovies.Controllers.SearchController.ReleaseDate != "")
+                        {
+                            @Html.Raw("Release date: " + AzureMovies.Controllers.SearchController.ReleaseDate)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.DirectorName != null)
+                        {
+                            @Html.Raw("Director: " + AzureMovies.Controllers.SearchController.DirectorName)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.ScreenPlaysCount != 0)
+                        {
+                            @Html.Raw("Screenplay: " + AzureMovies.Controllers.SearchController.ScreenPlay)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.WritersCount != 0)
+                        {
+                            @Html.Raw("Writer: " + AzureMovies.Controllers.SearchController.Writer)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.ComposerJobCount != 0)
+                        {
+                            @Html.Raw("Composer: " + AzureMovies.Controllers.SearchController.Composer)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.Budget != null || AzureMovies.Controllers.SearchController.Budget != 0)
+                        {
+                            @Html.Raw("Budget: " + AzureMovies.Controllers.SearchController.Budget)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.Revenue != null || AzureMovies.Controllers.SearchController.Revenue != 0)
+                        {
+                            @Html.Raw("Revenue: " + AzureMovies.Controllers.SearchController.Revenue)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.Genres != null || AzureMovies.Controllers.SearchController.Genres != "")
+                        {
+                            @Html.Raw("Genres: " + AzureMovies.Controllers.SearchController.Genres)
+                            <br />
+                            <br />
+                        }
+                        @if (AzureMovies.Controllers.SearchController.Overview != null || AzureMovies.Controllers.SearchController.Overview != "")
+                        {
+                            @Html.Raw("Overview: " + AzureMovies.Controllers.SearchController.Overview)
+                        }
+                    </label>
+                    <iframe src="@Url.Content(AzureMovies.Controllers.SearchController.TrailerVideoUrl)"
+                            width="460" height="315" frameborder="0" allowfullscreen class="Trailer"></iframe>
+                </label>
+            </div>
+            @using (Html.BeginForm(new { Class = "CrewTable" }))
+            {
+                <div><b>Cast:</b><br /></div>
+                <table class="table table-bordered table-responsive table-hover">
+                    <tr>
+                        <th></th>
+                        <th>Name </th>
+                        <th>Character Name </th>
+                    </tr>
+                    @for (int i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><img src="@Url.Content("http://image.tmdb.org/t/p/original" + @AzureMovies.Controllers.SearchController.ActorName[i].profile_path)" class="ActorPhoto" /> </td>
+                            <td>@AzureMovies.Controllers.SearchController.ActorName[i].name</td>
+                            <td>@AzureMovies.Controllers.SearchController.ActorName[i].character</td>
+                        </tr>
+                    }
+                </table>
+            }
+            @Html.ActionLink("Full Cast", "FullCast") &
+            @Html.ActionLink("Full Crew", "FullCrew")
+        </div>
+    </form>
+</body>
+</html>

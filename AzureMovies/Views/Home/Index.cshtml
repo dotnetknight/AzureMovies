@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/ryDNhMO.jpg" />
+    <title>NQ Movies</title>
+</head>
+<body>
+    <div>
+        @RenderPage("~/Views/Header.cshtml")
+        @RenderPage("~/Views/NowPlaying.cshtml")
+        @RenderPage("~/Views/Upcoming.cshtml")
+        @RenderPage("~/Views/Popular.cshtml")
+        @RenderPage("~/Views/Bottom.cshtml")
+    </div>
+</body>
+</html>

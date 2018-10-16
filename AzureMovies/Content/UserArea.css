@@ -1,0 +1,11 @@
+﻿.UserAreaForm {
+    position:absolute;
+    margin-top:-14px;
+    text-align:right;
+}
+.logout{
+    margin-left:280px;
+    text-align:center;
+    background-color:gray;
+    padding:10px;
+}

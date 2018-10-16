@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/PopularPosters.css" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("GetData", "Search", FormMethod.Post))
+        {
+            List<AzureMovies.GetPopular> Popular = new List<AzureMovies.GetPopular>();
+            Popular = AzureMovies.GetPopularData.GetData();
+
+            <div class="PopularDiv">
+                <label class="PopularLBL">Popular:</label>
+                <br />
+                @for (int i = 0; i < 9; i++)
+                {
+                    <div class="container2">
+                        <img src="@Url.Content("http://image.tmdb.org/t/p/original" + @Popular[i].poster_path)" al alt="Avatar" class="image2">
+                        <div class="middle2">
+                            <button type="submit" class="text2" id="@Popular[i].id" name="btnId" value="@Popular[i].id">@Popular[i].title</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>

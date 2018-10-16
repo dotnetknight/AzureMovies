@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/NowPlayingPosters.css" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("GetData", "Search", FormMethod.Post))
+        {
+            List<AzureMovies.GetNowPlaying> NowPlaying = new List<GetNowPlaying>();
+            NowPlaying = AzureMovies.GetNowPlayingData.GetData();
+
+            <div class="NowPlayingDiv">
+                <label class="NowPlayingLBL">Now Playing:</label>
+                <br />
+                @for (int i = 0; i < 9; i++)
+                {
+                    if (NowPlaying[i].poster_path == null) { i++; }
+                    else
+                    {
+                        <div class="container">
+                            <img src="@Url.Content("http://image.tmdb.org/t/p/original" + @NowPlaying[i].poster_path)" alt="Avatar" class="image">
+                            <div class="middle">
+                                <button type="submit" class="text" id="@NowPlaying[i].id" name="btnId" value="@NowPlaying[i].id">@NowPlaying[i].title</button>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+﻿@model AzureMovies.Models.Search
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/ryDNhMO.jpg" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/form-search.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <title>Search</title>
+</head>
+<body onclick="Hide()">
+
+    <script>
+        var Key = false;
+
+        function Hide()
+        {
+            document.getElementById("SearchResults").style.display = "none";
+            if (!Key) { var txt = document.getElementById('SearchBox'); if (txt.value != "") { Show(); } }
+        }
+        function WhichButton(event) {
+            Key = true;
+            var btn = event.button;
+            if (btn == 0) {
+                var txt = document.getElementById('SearchBox');
+                if (txt.value != "") {Show(); }
+                else { document.getElementById("SearchResults").style.display = "none"; }
+            }
+        }
+        function Show() { document.getElementById("SearchResults").style.display = "block"; }
+    </script>
+
+    <script>
+        var deleted = false;
+        function checkPhoneKey(key) {
+            var input = document.getElementById('SearchBox');
+            if (key == 'Backspace') {
+                if (input.value == '' || input.value == null) {
+                    document.getElementById("SearchResults").style.display = "none";
+                } else { myFunction(); }
+            } else { myFunction(); }
+
+        }
+    </script>
+
+
+    <script type="text/javascript">
+
+        var myVar;
+        function myFunction() {
+            var a = document.getElementById('SearchBox');
+            if (a.value != '' || a.value != null) {
+                myVar = setTimeout(showPage, 1100);
+            } else { document.getElementById("SearchResults").style.display = "none"; }
+        }
+
+        function showPage() {
+            $.post("/Search/PostMethod",
+                  { name: $("#SearchBox").val() },
+                  function (response) {
+                      //  document.getElementById('SearchResults').style.display = "block";
+                      //  $('#FirstMov').val(response.MovieTitles[1].title);
+
+                      //  $('.image').attr("src", "http://image.tmdb.org/t/p/original" + response.MovieTitles[1].poster_path);
+                      var number = 0;
+                      number = response.ResultCount;
+                      var RespTitle = "";
+                      RespTitle = response.MovieTitles;
+                      if (RespTitle == " " || RespTitle == "") { document.getElementById("SearchResults").style.display = "none"; }
+                      else if (number == 1009) { document.getElementById("SearchResults").style.display = "none"; }
+                      else {
+                          document.getElementById("SearchResults").style.display = "block";
+                          for (var i = 0; i < 5; i++) {
+                              document.getElementById('MovieTitle' + i).innerText = response.MovieTitles[i].title;
+                              $('#MovieBTN' + i).css('background-image', 'url(' + "http://image.tmdb.org/t/p/original" + response.MovieTitles[i].poster_path + ')');
+                              $('#MovieBTN' + i).val(response.MovieTitles[i].title);
+                              $('#MovieBTN' + i).val(response.MovieTitles[i].id);
+                          }
+                      }
+                  }
+               );
+        }
+    </script>
+
+    @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { Class = "form-search" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.EditorFor(m => m.Keyword, new { htmlAttributes = new { Class = "SearchTBX", Placeholder = "I am looking for...", type = "Search", Id = "SearchBox", onkeyup = "return checkPhoneKey(event.key)", onmousedown = "WhichButton(event)" } })
+
+        <button type="submit">Search</button>
+        <i class="fa fa-search"></i>
+        @Html.ValidationMessageFor(m => m.Keyword, "", new { Class = "text-danger" })
+    }
+    @using (Html.BeginForm("GetData", "Search", FormMethod.Post, new { Class = "LiveSearchDiv" }))
+    {
+        <div id="SearchResults">
+            <div class="SearchResults">
+                <div class="Res">
+                    <button id="MovieBTN0" name="btnId" style="width:60px; height:80px; border: 0; background-size: 100%;background-size: 60px; margin-bottom: 5px;"><p id="MovieTitle0"></p></button>
+
+                    <br>
+
+                    <button id="MovieBTN1" name="btnId" style="width:60px; height:80px; border: 0; background-size: 100%; background-size: 60px; margin-bottom: 5px;"><p id="MovieTitle1"></p></button>
+
+                    <br>
+
+                    <button id="MovieBTN2" name="btnId" style=" width:60px; height:80px; border: 0; background-size: 100%; background-size: 60px; margin-bottom: 5px;" value=""><p id="MovieTitle2"></p></button>
+
+                    <br>
+
+                    <button id="MovieBTN3" name="btnId" style="width:60px; height:80px; border: 0; background-size: 100%; background-size: 60px; margin-bottom: 5px;"><p id="MovieTitle3"></p></button>
+
+                    <br>
+
+                    <button id="MovieBTN4" name="btnId" style=" width:60px; height:80px; border: 0; background-size: 100%; background-size: 60px; margin-bottom: 5px;"><p id="MovieTitle4"></p></button>
+
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

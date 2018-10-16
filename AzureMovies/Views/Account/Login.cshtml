@@ -1,0 +1,78 @@
+﻿@model AzureMovies.Models.Login
+
+@{
+    Layout = null;
+}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+
+<link rel="stylesheet" href="~/Content/form-login.css" />
+<link rel="stylesheet" href="~/Content/demo.css" />
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<html>
+<body>
+
+    <ul>
+        <li><a href="~/Home/Index">Home</a></li>
+        <li><a href="~/Account/Registration">Register</a></li>
+        <li><a href="~/Account/Login" class="active">Login</a></li>
+    </ul>
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { Class = "form-login" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="main-content">
+            <div class="form-log-in-with-email">
+                <div class="form-white-background">
+                    <div class="form-title-row">
+                        <h1>Log in</h1>
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.Email, "", new { Class = "text-danger" })
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.Password, "", new { Class = "text-danger" })
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.RememberMe)</span>
+                            @Html.EditorFor(model => model.RememberMe)
+                        </label>
+                    </div>
+                    <label style="color:red; text-align:center;">@ViewBag.Message</label>
+                    <div class="form-row">
+                        <button type="submit">Log in</button>
+                    </div>
+                </div>
+                <a href="#" class="form-forgotten-password">Forgotten password &middot;</a>
+                <a href="#" class="form-create-an-account">Create an account &rarr;</a>
+            </div>
+            <div class="form-sign-in-with-social">
+                <div class="form-row form-title-row">
+                    <span class="form-title">Sign in with</span>
+                </div>
+                <a href="#" class="form-google-button">Google</a>
+                <a href="#" class="form-facebook-button">Facebook</a>
+                <a href="#" class="form-twitter-button">Twitter</a>
+            </div>
+        </div>
+    }
+</body>
+</html>

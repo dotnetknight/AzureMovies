@@ -1,0 +1,113 @@
+﻿@model  AzureMovies.Models.RegUser
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<link rel="stylesheet" href="~/Content/demo.css" />
+<link rel="stylesheet" href="~/Content/form-registration.css" />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+</head>
+<body>
+    <ul>
+        <li><a href="~/Home/Index">Home</a></li>
+        <li><a href="~/Account/Registration" class="active">Register</a></li>
+        <li><a href="~/Account/Login">Login</a></li>
+    </ul>
+
+    @using (Html.BeginForm("Registration", "Account", FormMethod.Post, new { Class = "form-register" }))
+    {
+        @Html.AntiForgeryToken()
+        @ViewBag.Message
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="main-content">
+            <div class="form-register-with-email">
+
+                <div class="form-white-background">
+
+                    <div class="form-title-row">
+                        <h1>Create an account</h1>
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.First_Name, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.First_Name, "", new { Class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.Last_Name, "", new { Class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.Email, "", new { Class = "text-danger" })
+                        @Html.ValidationMessage("EmailExists", new { Class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.Password_Hash, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.Password_Hash, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.Password_Hash, "", new { Class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>@Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })</span>
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <br />
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { Class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="checkbox" checked>
+                            <span>I agree to the <a href="#">terms and conditions</a></span>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="submit">Register</button>
+                    </div>
+
+                </div>
+
+                <a href="#" class="form-log-in-with-existing">Already have an account? Login here &rarr;</a>
+
+            </div>
+
+            <div class="form-sign-in-with-social">
+
+                <div class="form-row form-title-row">
+                    <span class="form-title">Sign in with</span>
+                </div>
+
+                <a href="#" class="form-google-button">Google</a>
+                <a href="#" class="form-facebook-button">Facebook</a>
+                <a href="#" class="form-twitter-button">Twitter</a>
+
+            </div>
+        </div>
+    }
+</body>
+</html>

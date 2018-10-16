@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/demo.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrapmin.css" />
+    <link rel="stylesheet" href="~/Content/form-fullcrew.css" />
+    <title>FullCrew</title>
+</head>
+<body>
+    <div>
+        @if (@AzureMovies.Controllers.SearchController.CrewCount != 0)
+        {
+            @RenderPage("~/Views/Header.cshtml")
+            <div class="FullCrew">
+                <div><b>@AzureMovies.Controllers.SearchController.MovieTitle crew:</b><br /></div>
+                <br />
+                <table class="table table-bordered table-responsive table-hover">
+                    <tr>
+                        <th></th>
+                        <th>Name </th>
+                        <th>Job </th>
+                    </tr>
+                    @for (int i = 0; i < @AzureMovies.Controllers.SearchController.CrewCount; i++)
+                    {
+                        <tr>
+                            <td><img src="@Url.Content("http://image.tmdb.org/t/p/original" + @AzureMovies.Controllers.SearchController.FullCrewData[i].profile_path)" class="CrewMemberPhoto" /> </td>
+                            <td>@AzureMovies.Controllers.SearchController.FullCrewData[i].name</td>
+                            <td>@AzureMovies.Controllers.SearchController.FullCrewData[i].job</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+        else if (AzureMovies.Controllers.SearchController.CrewCount == 0)
+        { <label>Opps! Crew can't be found</label>}
+    </div>
+</body>
+</html>
